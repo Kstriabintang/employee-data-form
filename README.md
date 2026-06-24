@@ -62,27 +62,27 @@ Tampilan formulir di perangkat mobile, masing-masing menunjukkan isian sample da
 <table align="center">
   <tr>
     <td align="center" width="50%">
-      <img src="screenshots/mobile-step-1.png" width="280" alt="Data Pribadi"><br>
+      <img src="screenshots/mobile-step-1.png" width="240" alt="Data Pribadi"><br>
       <b>1. Data Pribadi</b>
     </td>
     <td align="center" width="50%">
-      <img src="screenshots/mobile-step-2.png" width="280" alt="Data Kepegawaian"><br>
+      <img src="screenshots/mobile-step-2.png" width="240" alt="Data Kepegawaian"><br>
       <b>2. Data Kepegawaian</b>
     </td>
   </tr>
   <tr>
     <td align="center" width="50%">
-      <img src="screenshots/mobile-step-3.png" width="280" alt="Kontak Darurat"><br>
+      <img src="screenshots/mobile-step-3.png" width="240" alt="Kontak Darurat"><br>
       <b>3. Kontak Darurat</b>
     </td>
     <td align="center" width="50%">
-      <img src="screenshots/mobile-step-4.png" width="280" alt="Unggah Dokumen"><br>
+      <img src="screenshots/mobile-step-4.png" width="240" alt="Unggah Dokumen"><br>
       <b>4. Unggah Dokumen</b>
     </td>
   </tr>
   <tr>
     <td align="center" colspan="2">
-      <img src="screenshots/mobile-step-5.png" width="280" alt="Konfirmasi Data"><br>
+      <img src="screenshots/mobile-step-5.png" width="240" alt="Konfirmasi Data"><br>
       <b>5. Konfirmasi Data</b>
     </td>
   </tr>
