@@ -55,34 +55,38 @@ A professional, responsive, multi-step employee data collection form integrated 
 
 ---
 
-## 📸 Screenshots
+## 📸 Screenshots (Mobile)
 
-Screenshots were captured from the portfolio showcase build with sample data filled in.
+Tampilan formulir di perangkat mobile, masing-masing menunjukkan isian sample data untuk setiap step.
 
-### 1. Data Pribadi
-| Mobile | Desktop |
-|---|---|
-| ![Mobile step 1](screenshots/mobile-step-1.png) | ![Desktop step 1](screenshots/desktop-step-1.png) |
-
-### 2. Data Kepegawaian
-| Mobile | Desktop |
-|---|---|
-| ![Mobile step 2](screenshots/mobile-step-2.png) | ![Desktop step 2](screenshots/desktop-step-2.png) |
-
-### 3. Kontak Darurat
-| Mobile | Desktop |
-|---|---|
-| ![Mobile step 3](screenshots/mobile-step-3.png) | ![Desktop step 3](screenshots/desktop-step-3.png) |
-
-### 4. Unggah Dokumen
-| Mobile | Desktop |
-|---|---|
-| ![Mobile step 4](screenshots/mobile-step-4.png) | ![Desktop step 4](screenshots/desktop-step-4.png) |
-
-### 5. Konfirmasi Data
-| Mobile | Desktop |
-|---|---|
-| ![Mobile step 5](screenshots/mobile-step-5.png) | ![Desktop step 5](screenshots/desktop-step-5.png) |
+<table align="center">
+  <tr>
+    <td align="center" width="50%">
+      <img src="screenshots/mobile-step-1.png" width="280" alt="Data Pribadi"><br>
+      <b>1. Data Pribadi</b>
+    </td>
+    <td align="center" width="50%">
+      <img src="screenshots/mobile-step-2.png" width="280" alt="Data Kepegawaian"><br>
+      <b>2. Data Kepegawaian</b>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="screenshots/mobile-step-3.png" width="280" alt="Kontak Darurat"><br>
+      <b>3. Kontak Darurat</b>
+    </td>
+    <td align="center" width="50%">
+      <img src="screenshots/mobile-step-4.png" width="280" alt="Unggah Dokumen"><br>
+      <b>4. Unggah Dokumen</b>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" colspan="2">
+      <img src="screenshots/mobile-step-5.png" width="280" alt="Konfirmasi Data"><br>
+      <b>5. Konfirmasi Data</b>
+    </td>
+  </tr>
+</table>
 
 ---
 
