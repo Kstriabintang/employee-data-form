@@ -57,11 +57,32 @@ A professional, responsive, multi-step employee data collection form integrated 
 
 ## 📸 Screenshots
 
-> *(Add your own screenshots here)*
+Screenshots were captured from the portfolio showcase build with sample data filled in.
 
+### 1. Data Pribadi
 | Mobile | Desktop |
 |---|---|
-| ![Mobile](#) | ![Desktop](#) |
+| ![Mobile step 1](screenshots/mobile-step-1.png) | ![Desktop step 1](screenshots/desktop-step-1.png) |
+
+### 2. Data Kepegawaian
+| Mobile | Desktop |
+|---|---|
+| ![Mobile step 2](screenshots/mobile-step-2.png) | ![Desktop step 2](screenshots/desktop-step-2.png) |
+
+### 3. Kontak Darurat
+| Mobile | Desktop |
+|---|---|
+| ![Mobile step 3](screenshots/mobile-step-3.png) | ![Desktop step 3](screenshots/desktop-step-3.png) |
+
+### 4. Unggah Dokumen
+| Mobile | Desktop |
+|---|---|
+| ![Mobile step 4](screenshots/mobile-step-4.png) | ![Desktop step 4](screenshots/desktop-step-4.png) |
+
+### 5. Konfirmasi Data
+| Mobile | Desktop |
+|---|---|
+| ![Mobile step 5](screenshots/mobile-step-5.png) | ![Desktop step 5](screenshots/desktop-step-5.png) |
 
 ---
 
