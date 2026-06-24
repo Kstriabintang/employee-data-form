@@ -190,7 +190,6 @@ function formatSheet(sheet) {
     .setWrap(true);
 
   sheet.setFrozenRows(1);
-  sheet.setAutoFilter(headerRange);
 
   const widths = [
     140, 160, 130, 130, 130, 110, 110, 110, 130, 100,
@@ -219,6 +218,11 @@ function formatDataRows(sheet) {
   sheet.getRange(2, 1, lastRow - 1, 1).setNumberFormat('dd/MM/yyyy HH:mm:ss');
   sheet.getRange(2, 3, lastRow - 1, 1).setNumberFormat('@');
   sheet.getRange(2, 4, lastRow - 1, 1).setNumberFormat('@');
+
+  const filterRange = sheet.getRange(1, 1, lastRow, lastCol);
+  const existingFilter = sheet.getFilter();
+  if (existingFilter) existingFilter.remove();
+  filterRange.createFilter();
 }
 
 function getOrCreateFolder(parent, name) {
