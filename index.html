@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Data Karyawan — CV. Employee Data Portal</title>
+  <meta name="description" content="Formulir pengumpulan data karyawan CV. Employee Data Portal untuk keperluan kepegawaian.">
+  <meta name="theme-color" content="#0A0A0A">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="mobile.css">
+  <link rel="stylesheet" href="desktop.css" media="screen and (min-width: 768px)">
+</head>
+<body>
+  <div class="page-wrapper">
+    <header class="brand-header">
+      <div class="container header-inner">
+        <a href="https://your-domain.com" class="brand" target="_blank" rel="noopener">
+          <img src="remove-bg.png" alt="Logo Employee Data Portal" class="brand-logo">
+          <div class="brand-text">
+            <span class="brand-name">Employee Data Portal</span>
+            <span class="brand-tagline">Formulir Data Karyawan</span>
+          </div>
+        </a>
+      </div>
+    </header>
+
+    <main class="container main-content">
+      <div class="form-card">
+        <div class="form-header">
+          <h1>Input Data Karyawan</h1>
+          <p class="lead">Lengkapi data dengan benar untuk keperluan kepegawaian.</p>
+          <p class="draft-status" id="draftStatus"><i class="fa-solid fa-floppy-disk"></i> Draft tersimpan otomatis</p>
+        </div>
+
+        <div class="progress" role="progressbar" aria-label="Progress formulir">
+          <div class="progress-track">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+          <ol class="steps" id="stepsList">
+            <li class="step active" data-step="1"><span class="step-number">1</span><span class="step-label">Pribadi</span></li>
+            <li class="step" data-step="2"><span class="step-number">2</span><span class="step-label">Kepegawaian</span></li>
+            <li class="step" data-step="3"><span class="step-number">3</span><span class="step-label">Darurat</span></li>
+            <li class="step" data-step="4"><span class="step-number">4</span><span class="step-label">Dokumen</span></li>
+            <li class="step" data-step="5"><span class="step-number">5</span><span class="step-label">Konfirmasi</span></li>
+          </ol>
+        </div>
+
+        <form id="employeeForm" novalidate>
+          <!-- STEP 1: Data Pribadi -->
+          <fieldset class="step-panel active" id="step-1">
+            <legend class="sr-only">Data Pribadi</legend>
+            <div class="section-title">
+              <div class="section-icon"><i class="fa-solid fa-user"></i></div>
+              <h2>Data Pribadi</h2>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group full">
+                <label for="nama_lengkap">Nama Lengkap <span class="required">*</span></label>
+                <input type="text" id="nama_lengkap" name="nama_lengkap" placeholder="Sesuai KTP" required>
+                <small class="error-msg" id="error-nama_lengkap"></small>
+              </div>
+            </div>
+
+            <div class="form-row two-col">
+              <div class="form-group">
+                <label for="nik">NIK <span class="required">*</span></label>
+                <input type="text" inputmode="numeric" id="nik" name="nik" placeholder="16 digit NIK" maxlength="16" required>
+                <small class="error-msg" id="error-nik"></small>
+              </div>
+              <div class="form-group">
+                <label for="no_hp">Nomor HP Aktif <span class="required">*</span></label>
+                <input type="tel" id="no_hp" name="no_hp" placeholder="08xxxxxxxxxx" required>
+                <small class="error-msg" id="error-no_hp"></small>
+              </div>
+            </div>
+
+            <div class="form-row two-col">
+              <div class="form-group">
+                <label for="tempat_lahir">Tempat Lahir <span class="required">*</span></label>
+                <input type="text" id="tempat_lahir" name="tempat_lahir" placeholder="Kota kelahiran" required>
+                <small class="error-msg" id="error-tempat_lahir"></small>
+              </div>
+              <div class="form-group">
+                <label for="tanggal_lahir">Tanggal Lahir <span class="required">*</span></label>
+                <input type="date" id="tanggal_lahir" name="tanggal_lahir" required>
+                <small class="error-msg" id="error-tanggal_lahir"></small>
+              </div>
+            </div>
+
+            <div class="form-row two-col">
+              <div class="form-group">
+                <label for="jenis_kelamin">Jenis Kelamin <span class="required">*</span></label>
+                <select id="jenis_kelamin" name="jenis_kelamin" required>
+                  <option value="" disabled selected>Pilih</option>
+                  <option value="Laki-laki">Laki-laki</option>
+                  <option value="Perempuan">Perempuan</option>
+                </select>
+                <small class="error-msg" id="error-jenis_kelamin"></small>
+              </div>
+              <div class="form-group">
+                <label for="status_perkawinan">Status Perkawinan <span class="required">*</span></label>
+                <select id="status_perkawinan" name="status_perkawinan" required>
+                  <option value="" disabled selected>Pilih</option>
+                  <option value="Belum Kawin">Belum Kawin</option>
+                  <option value="Kawin">Kawin</option>
+                  <option value="Cerai Hidup">Cerai Hidup</option>
+                  <option value="Cerai Mati">Cerai Mati</option>
+                </select>
+                <small class="error-msg" id="error-status_perkawinan"></small>
+              </div>
+            </div>
+
+            <div class="form-row two-col">
+              <div class="form-group">
+                <label for="no_kk">Nomor KK <span class="required">*</span></label>
+                <input type="text" inputmode="numeric" id="no_kk" name="no_kk" placeholder="16 digit Nomor KK" maxlength="16" required>
+                <small class="error-msg" id="error-no_kk"></small>
+              </div>
+              <div class="form-group">
+                <label for="status_kk">Status dalam KK <span class="required">*</span></label>
+                <select id="status_kk" name="status_kk" required>
+                  <option value="" disabled selected>Pilih</option>
+                  <option value="Kepala Keluarga">Kepala Keluarga</option>
+                  <option value="Suami">Suami</option>
+                  <option value="Istri">Istri</option>
+                  <option value="Anak">Anak</option>
+                  <option value="Menantu">Menantu</option>
+                  <option value="Cucu">Cucu</option>
+                  <option value="Orang Tua">Orang Tua</option>
+                  <option value="Mertua">Mertua</option>
+                  <option value="Famili Lain">Famili Lain</option>
+                  <option value="Pembantu">Pembantu</option>
+                  <option value="Lainnya">Lainnya</option>
+                </select>
+                <small class="error-msg" id="error-status_kk"></small>
+              </div>
+            </div>
+
+            <div class="form-row two-col">
+              <div class="form-group">
+                <label for="agama">Agama <span class="required">*</span></label>
+                <select id="agama" name="agama" required>
+                  <option value="" disabled selected>Pilih Agama</option>
+                  <option value="Islam">Islam</option>
+                  <option value="Kristen Protestan">Kristen Protestan</option>
+                  <option value="Kristen Katolik">Kristen Katolik</option>
+                  <option value="Hindu">Hindu</option>
+                  <option value="Buddha">Buddha</option>
+                  <option value="Konghucu">Konghucu</option>
+                  <option value="Lainnya">Lainnya</option>
+                </select>
+                <small class="error-msg" id="error-agama"></small>
+              </div>
+              <div class="form-group">
+                <label for="pendidikan_terakhir">Pendidikan Terakhir <span class="required">*</span></label>
+                <select id="pendidikan_terakhir" name="pendidikan_terakhir" required>
+                  <option value="" disabled selected>Pilih Pendidikan</option>
+                  <option value="SD / Sederajat">SD / Sederajat</option>
+                  <option value="SMP / Sederajat">SMP / Sederajat</option>
+                  <option value="SMA / SMK / Sederajat">SMA / SMK / Sederajat</option>
+                  <option value="D1">D1</option>
+                  <option value="D2">D2</option>
+                  <option value="D3">D3</option>
+                  <option value="S1 / D4">S1 / D4</option>
+                  <option value="S2">S2</option>
+                  <option value="S3">S3</option>
+                  <option value="Lainnya">Lainnya</option>
+                </select>
+                <small class="error-msg" id="error-pendidikan_terakhir"></small>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group full">
+                <label for="alamat_ktp">Alamat Sesuai KTP <span class="required">*</span></label>
+                <textarea id="alamat_ktp" name="alamat_ktp" rows="2" placeholder="Alamat lengkap" required></textarea>
+                <small class="error-msg" id="error-alamat_ktp"></small>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group full">
+                <label class="checkbox">
+                  <input type="checkbox" id="alamat_sama" name="alamat_sama">
+                  <span class="checkmark"></span>
+                  <span class="checkbox-text">Alamat domisili sama dengan KTP</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group full">
+                <label for="alamat_domisili">Alamat Domisili <span class="required">*</span></label>
+                <textarea id="alamat_domisili" name="alamat_domisili" rows="2" placeholder="Alamat tempat tinggal sekarang" required></textarea>
+                <small class="error-msg" id="error-alamat_domisili"></small>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group full">
+                <label for="email">Email <span class="required">*</span></label>
+                <input type="email" id="email" name="email" placeholder="nama@email.com" required>
+                <small class="error-msg" id="error-email"></small>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- STEP 2: Data Kepegawaian -->
+          <fieldset class="step-panel" id="step-2">
+            <legend class="sr-only">Data Kepegawaian</legend>
+            <div class="section-title">
+              <div class="section-icon"><i class="fa-solid fa-briefcase"></i></div>
+              <h2>Data Kepegawaian</h2>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group full">
+                <label for="jabatan">Jabatan / Posisi <span class="required">*</span></label>
+                <select id="jabatan" name="jabatan" required>
+                  <option value="" disabled selected>Pilih Jabatan / Posisi</option>
+                  <option value="Teknisi Fiber Optik">Teknisi Fiber Optik</option>
+                  <option value="Teknisi Wireless / Radio">Teknisi Wireless / Radio</option>
+                  <option value="Teknisi Lapangan">Teknisi Lapangan</option>
+                  <option value="NOC Engineer">NOC Engineer</option>
+                  <option value="Helpdesk / Customer Support">Helpdesk / Customer Support</option>
+                  <option value="Sales Executive">Sales Executive</option>
+                  <option value="Marketing Officer">Marketing Officer</option>
+                  <option value="Account Manager">Account Manager</option>
+                  <option value="Admin Billing">Admin Billing</option>
+                  <option value="Finance Staff">Finance Staff</option>
+                  <option value="HRD Staff">HRD Staff</option>
+                  <option value="Admin Gudang">Admin Gudang</option>
+                  <option value="Surveyor / Site Acquisition">Surveyor / Site Acquisition</option>
+                  <option value="Quality Assurance">Quality Assurance</option>
+                  <option value="Driver / Kurir">Driver / Kurir</option>
+                  <option value="Lainnya">Lainnya</option>
+                </select>
+                <small class="error-msg" id="error-jabatan"></small>
+              </div>
+            </div>
+
+            <div class="form-row two-col">
+              <div class="form-group">
+                <label for="tanggal_masuk">Tanggal Mulai Kerja <span class="required">*</span></label>
+                <input type="date" id="tanggal_masuk" name="tanggal_masuk" required>
+                <small class="error-msg" id="error-tanggal_masuk"></small>
+              </div>
+              <div class="form-group">
+                <label for="status_karyawan">Status Karyawan <span class="required">*</span></label>
+                <select id="status_karyawan" name="status_karyawan" required>
+                  <option value="" disabled selected>Pilih</option>
+                  <option value="PKWTT">PKWTT (Tetap)</option>
+                  <option value="PKWT">PKWT (Kontrak)</option>
+                  <option value="Magang">Magang</option>
+                </select>
+                <small class="error-msg" id="error-status_karyawan"></small>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group full">
+                <label for="npwp">NPWP</label>
+                <input type="text" id="npwp" name="npwp" placeholder="Opsional">
+                <small class="error-msg" id="error-npwp"></small>
+              </div>
+            </div>
+
+          </fieldset>
+
+          <!-- STEP 3: Kontak Darurat -->
+          <fieldset class="step-panel" id="step-3">
+            <legend class="sr-only">Kontak Darurat</legend>
+            <div class="section-title">
+              <div class="section-icon"><i class="fa-solid fa-phone-volume"></i></div>
+              <h2>Kontak Darurat</h2>
+            </div>
+
+            <div class="form-row two-col">
+              <div class="form-group">
+                <label for="nama_kd">Nama Kontak Darurat <span class="required">*</span></label>
+                <input type="text" id="nama_kd" name="nama_kd" placeholder="Nama lengkap" required>
+                <small class="error-msg" id="error-nama_kd"></small>
+              </div>
+              <div class="form-group">
+                <label for="hubungan_kd">Hubungan <span class="required">*</span></label>
+                <select id="hubungan_kd" name="hubungan_kd" required>
+                  <option value="" disabled selected>Pilih</option>
+                  <option value="Orang Tua">Orang Tua</option>
+                  <option value="Pasangan">Pasangan</option>
+                  <option value="Saudara Kandung">Saudara Kandung</option>
+                  <option value="Anak">Anak</option>
+                  <option value="Lainnya">Lainnya</option>
+                </select>
+                <small class="error-msg" id="error-hubungan_kd"></small>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group full">
+                <label for="no_hp_kd">Nomor HP Kontak Darurat <span class="required">*</span></label>
+                <input type="tel" id="no_hp_kd" name="no_hp_kd" placeholder="08xxxxxxxxxx" required>
+                <small class="error-msg" id="error-no_hp_kd"></small>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- STEP 4: Dokumen -->
+          <fieldset class="step-panel" id="step-4">
+            <legend class="sr-only">Unggah Dokumen</legend>
+            <div class="section-title">
+              <div class="section-icon"><i class="fa-solid fa-folder-open"></i></div>
+              <h2>Unggah Dokumen</h2>
+            </div>
+            <p class="section-desc">Unggah foto/scan dokumen agar proses administrasi lebih cepat. Format: JPG, PNG, atau PDF (maks. 5 MB per file).</p>
+
+            <div class="form-row">
+              <div class="form-group full">
+                <label class="dropzone" for="file_ktp">
+                  <input type="file" id="file_ktp" name="file_ktp" accept="image/*,.pdf" required>
+                  <span class="dz-icon"><i class="fa-solid fa-id-card"></i></span>
+                  <span class="dz-title">KTP <span class="required">*</span></span>
+                  <span class="dz-hint" id="hint-file_ktp">Ketuk untuk pilih file</span>
+                </label>
+                <small class="error-msg" id="error-file_ktp"></small>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group full">
+                <label class="dropzone" for="file_kk">
+                  <input type="file" id="file_kk" name="file_kk" accept="image/*,.pdf" required>
+                  <span class="dz-icon"><i class="fa-solid fa-users-rectangle"></i></span>
+                  <span class="dz-title">Kartu Keluarga <span class="required">*</span></span>
+                  <span class="dz-hint" id="hint-file_kk">Ketuk untuk pilih file</span>
+                </label>
+                <small class="error-msg" id="error-file_kk"></small>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group full">
+                <label class="dropzone" for="file_npwp">
+                  <input type="file" id="file_npwp" name="file_npwp" accept="image/*,.pdf">
+                  <span class="dz-icon"><i class="fa-solid fa-file-invoice"></i></span>
+                  <span class="dz-title">NPWP <span class="optional">(Opsional)</span></span>
+                  <span class="dz-hint" id="hint-file_npwp">Ketuk untuk pilih file</span>
+                </label>
+                <small class="error-msg" id="error-file_npwp"></small>
+              </div>
+            </div>
+
+          </fieldset>
+
+          <!-- STEP 5: Konfirmasi -->
+          <fieldset class="step-panel" id="step-5">
+            <legend class="sr-only">Konfirmasi Data</legend>
+            <div class="section-title">
+              <div class="section-icon"><i class="fa-solid fa-clipboard-check"></i></div>
+              <h2>Konfirmasi Data</h2>
+            </div>
+            <p class="section-desc">Periksa kembali data sebelum dikirim. Tekan tombol <strong>Kembali</strong> jika ada yang perlu diubah.</p>
+
+            <div id="summaryContainer" class="summary">
+              <!-- JS fills this -->
+            </div>
+
+            <div class="form-row">
+              <div class="form-group full">
+                <label class="checkbox confirm-checkbox">
+                  <input type="checkbox" id="konfirmasi" name="konfirmasi" required>
+                  <span class="checkmark"></span>
+                  <span class="checkbox-text">Saya menyatakan data yang diisi sudah benar dan dapat digunakan untuk keperluan perusahaan.</span>
+                </label>
+                <small class="error-msg" id="error-konfirmasi"></small>
+              </div>
+            </div>
+          </fieldset>
+
+          <div class="form-actions" id="formActions">
+            <button type="button" class="btn btn-secondary" id="prevBtn" disabled>
+              <i class="fa-solid fa-arrow-left"></i> Kembali
+            </button>
+            <button type="button" class="btn btn-primary" id="nextBtn">
+              Lanjut <i class="fa-solid fa-arrow-right"></i>
+            </button>
+            <button type="submit" class="btn btn-success hidden" id="submitBtn">
+              <i class="fa-solid fa-paper-plane"></i> Kirim Data
+            </button>
+          </div>
+        </form>
+
+        <!-- Success state -->
+        <div class="success-state hidden" id="successState">
+          <div class="success-icon">
+            <i class="fa-solid fa-circle-check"></i>
+          </div>
+          <h2>Data Berhasil Dikirim</h2>
+          <p>Terima kasih. Data karyawan telah tersimpan dan akan diproses oleh tim HRD Employee Data Portal.</p>
+          <div class="success-actions">
+            <button type="button" class="btn btn-primary" id="newEntryBtn">
+              <i class="fa-solid fa-user-plus"></i> Input Karyawan Lain
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>&copy; <span id="year"></span> CV. Employee Data Portal. Seluruh hak cipta dilindungi.</p>
+        <p class="footer-domain">your-domain.com</p>
+      </div>
+    </footer>
+  </div>
+
+  <div id="toast" class="toast hidden" role="status" aria-live="polite">
+    <i class="fa-solid fa-circle-info"></i>
+    <span id="toastMsg"></span>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
