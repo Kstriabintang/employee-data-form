@@ -14,6 +14,12 @@ const CONFIG = {
   SECRET_TOKEN: 'YOUR_SECRET_TOKEN'
 };
 
+const FILE_LABELS = {
+  file_ktp: 'KTP',
+  file_kk: 'KK',
+  file_npwp: 'NPWP'
+};
+
 function doPost(e) {
   try {
     const data = JSON.parse(e.postData.contents);
@@ -29,13 +35,16 @@ function doPost(e) {
     if (!sheet) {
       sheet = ss.insertSheet(CONFIG.SHEET_NAME);
       sheet.appendRow(getHeaders());
-      sheet.getRange(1, 1, 1, getHeaders().length)
-        .setFontWeight('bold')
-        .setBackground('#0A0A0A')
-        .setFontColor('#C9A227');
     }
+    formatSheet(sheet);
 
-    // Simpan file ke Google Drive
+    // Buat folder karyawan di Google Drive
+    const mainFolder = DriveApp.getFolderById(CONFIG.FOLDER_ID);
+    const employeeId = data.nik || data.no_hp || Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyyMMdd_HHmmss');
+    const folderName = (data.nama_lengkap || 'Karyawan').trim() + ' - ' + employeeId;
+    const employeeFolder = getOrCreateFolder(mainFolder, folderName);
+
+    // Simpan file ke folder karyawan
     const files = data.files || {};
     const fileLinks = {};
     for (const key of ['file_ktp', 'file_kk', 'file_npwp']) {
@@ -47,10 +56,11 @@ function doPost(e) {
             fileObj.mime,
             fileObj.name
           );
-          const folder = DriveApp.getFolderById(CONFIG.FOLDER_ID);
-          const driveFile = folder.createFile(blob);
-          driveFile.setName(safeFileName(data.nama_lengkap, key, driveFile.getName()));
-          fileLinks[key] = driveFile.getUrl();
+          const driveFile = employeeFolder.createFile(blob);
+          const ext = fileObj.name.split('.').pop();
+          const newName = buildFileName(data.nama_lengkap, key, ext);
+          driveFile.setName(newName);
+          fileLinks[key] = makeHyperlink(driveFile.getUrl(), 'Lihat ' + (FILE_LABELS[key] || key));
         } catch (fileErr) {
           fileLinks[key] = 'Gagal upload: ' + fileErr.message;
         }
@@ -77,7 +87,7 @@ function doPost(e) {
       data.no_hp || '',                 // N. No HP
       data.email || '',                 // O. Email
       data.jabatan || '',               // P. Jabatan
-      data.tanggal_masuk || '',         // O. Tanggal Masuk
+      data.tanggal_masuk || '',         // Q. Tanggal Masuk
       data.status_karyawan || '',       // R. Status Karyawan
       data.npwp || '',                  // S. NPWP
       data.nama_kd || '',               // T. Nama Kontak Darurat
@@ -89,6 +99,7 @@ function doPost(e) {
     ];
 
     sheet.appendRow(row);
+    formatDataRows(sheet);
 
     // Kirim notifikasi email (opsional)
     if (CONFIG.HRD_EMAIL) {
@@ -100,6 +111,7 @@ function doPost(e) {
                 '\n\nNama: ' + (data.nama_lengkap || '-') +
                 '\nJabatan: ' + (data.jabatan || '-') +
                 '\nNo HP: ' + (data.no_hp || '-') +
+                '\nFolder Drive: ' + employeeFolder.getUrl() +
                 '\n\nSilakan cek Google Sheets untuk detail lengkap.'
         });
       } catch (emailErr) {
@@ -158,9 +170,66 @@ function getHeaders() {
   ];
 }
 
-function safeFileName(nama, jenis, originalName) {
-  const cleanNama = (nama || 'karyawan').replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_');
-  const ext = originalName.split('.').pop();
-  const timestamp = Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyyMMdd_HHmmss');
-  return cleanNama + '_' + jenis + '_' + timestamp + '.' + ext;
+function formatSheet(sheet) {
+  const lastCol = getHeaders().length;
+  const headerRange = sheet.getRange(1, 1, 1, lastCol);
+
+  headerRange
+    .setFontWeight('bold')
+    .setFontColor('#FFFFFF')
+    .setBackground('#0A0A0A')
+    .setHorizontalAlignment('center')
+    .setVerticalAlignment('middle')
+    .setWrap(true);
+
+  sheet.setFrozenRows(1);
+  sheet.setAutoFilter(headerRange);
+
+  const widths = [
+    140, 160, 130, 130, 130, 110, 110, 110, 130, 100,
+    140, 240, 240, 130, 180, 160, 120, 130, 150, 160,
+    130, 130, 120, 120, 120
+  ];
+  widths.forEach((width, index) => sheet.setColumnWidth(index + 1, width));
+}
+
+function formatDataRows(sheet) {
+  const lastRow = sheet.getLastRow();
+  const lastCol = getHeaders().length;
+  if (lastRow < 2) return;
+
+  const dataRange = sheet.getRange(2, 1, lastRow - 1, lastCol);
+  dataRange
+    .setVerticalAlignment('top')
+    .setWrap(true)
+    .setBorder(true, true, true, true, true, true, '#E0E0E0', SpreadsheetApp.BorderStyle.SOLID);
+
+  for (let row = 2; row <= lastRow; row++) {
+    const bgColor = (row % 2 === 0) ? '#FFFFFF' : '#F8F8F5';
+    sheet.getRange(row, 1, 1, lastCol).setBackground(bgColor);
+  }
+
+  sheet.getRange(2, 1, lastRow - 1, 1).setNumberFormat('dd/MM/yyyy HH:mm:ss');
+  sheet.getRange(2, 3, lastRow - 1, 1).setNumberFormat('@');
+  sheet.getRange(2, 4, lastRow - 1, 1).setNumberFormat('@');
+}
+
+function getOrCreateFolder(parent, name) {
+  const folders = parent.getFoldersByName(name);
+  if (folders.hasNext()) {
+    return folders.next();
+  }
+  return parent.createFolder(name);
+}
+
+function buildFileName(nama, jenisKey, ext) {
+  const cleanNama = (nama || 'Karyawan').replace(/[^a-zA-Z0-9\s]/g, '').trim();
+  const label = FILE_LABELS[jenisKey] || jenisKey;
+  const timestamp = Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyy-MM-dd_HHmmss');
+  return cleanNama + ' - ' + label + ' ' + timestamp + '.' + ext;
+}
+
+function makeHyperlink(url, label) {
+  if (!url || !url.startsWith('http')) return url || '-';
+  return "=HYPERLINK('" + url + "','" + label + "')";
 }
