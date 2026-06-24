@@ -57,33 +57,37 @@ A professional, responsive, multi-step employee data collection form integrated 
 
 ## 📸 Screenshots (Mobile)
 
-Tampilan formulir di perangkat mobile, masing-masing menunjukkan isian sample data untuk setiap step.
+Tampilan formulir di perangkat mobile. Semua screenshot diambil dengan rasio layar HP (16:9) dan diatur memenuhi lebar halaman.
 
-<table align="center">
+<table width="100%">
   <tr>
-    <td align="center" width="50%">
-      <img src="screenshots/mobile-step-1.png" width="240" alt="Data Pribadi"><br>
+    <td align="center" width="50%" valign="top">
+      <img src="screenshots/mobile-step-1.png" width="100%" alt="Data Pribadi"><br>
       <b>1. Data Pribadi</b>
     </td>
-    <td align="center" width="50%">
-      <img src="screenshots/mobile-step-2.png" width="240" alt="Data Kepegawaian"><br>
+    <td align="center" width="50%" valign="top">
+      <img src="screenshots/mobile-step-2.png" width="100%" alt="Data Kepegawaian"><br>
       <b>2. Data Kepegawaian</b>
     </td>
   </tr>
   <tr>
-    <td align="center" width="50%">
-      <img src="screenshots/mobile-step-3.png" width="240" alt="Kontak Darurat"><br>
+    <td align="center" width="50%" valign="top">
+      <img src="screenshots/mobile-step-3.png" width="100%" alt="Kontak Darurat"><br>
       <b>3. Kontak Darurat</b>
     </td>
-    <td align="center" width="50%">
-      <img src="screenshots/mobile-step-4.png" width="240" alt="Unggah Dokumen"><br>
+    <td align="center" width="50%" valign="top">
+      <img src="screenshots/mobile-step-4.png" width="100%" alt="Unggah Dokumen"><br>
       <b>4. Unggah Dokumen</b>
     </td>
   </tr>
   <tr>
-    <td align="center" colspan="2">
-      <img src="screenshots/mobile-step-5.png" width="240" alt="Konfirmasi Data"><br>
+    <td align="center" width="50%" valign="top">
+      <img src="screenshots/mobile-step-5.png" width="100%" alt="Konfirmasi Data"><br>
       <b>5. Konfirmasi Data</b>
+    </td>
+    <td align="center" width="50%" valign="top">
+      <img src="screenshots/mobile-step-5b.png" width="100%" alt="Konfirmasi Data - Tombol Kirim"><br>
+      <b>5. Konfirmasi Data — Kirim</b>
     </td>
   </tr>
 </table>
