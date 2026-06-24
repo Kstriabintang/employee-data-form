@@ -5,6 +5,8 @@
    ======================================== */
 
 const CONFIG = {
+  // SPREADSHEET_ID: ambil dari URL Google Sheets (bagian antara /d/ dan /edit)
+  SPREADSHEET_ID: 'YOUR_SPREADSHEET_ID',
   SHEET_NAME: 'DataKaryawan',
   // GANTI dengan ID folder Google Drive tempat menyimpan dokumen
   FOLDER_ID: 'YOUR_FOLDER_ID',
@@ -29,8 +31,13 @@ function doPost(e) {
       return jsonResponse({ success: false, message: 'Akses ditolak. Token tidak valid.' });
     }
 
+    // Validasi konfigurasi
+    if (!CONFIG.SPREADSHEET_ID || CONFIG.SPREADSHEET_ID === 'YOUR_SPREADSHEET_ID') {
+      return jsonResponse({ success: false, message: 'Spreadsheet ID belum dikonfigurasi di Code.gs.' });
+    }
+
     // Buka atau buat sheet
-    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    const ss = SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID);
     let sheet = ss.getSheetByName(CONFIG.SHEET_NAME);
     if (!sheet) {
       sheet = ss.insertSheet(CONFIG.SHEET_NAME);
